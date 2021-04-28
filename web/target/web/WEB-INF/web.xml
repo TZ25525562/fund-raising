@@ -1,0 +1,87 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>funding-raising-Application</display-name>
+
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml,classpath:mybatis-config.xml</param-value>
+  </context-param>
+
+
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+<!--    指定字符集-->
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+<!--    强制请求编码-->
+    <init-param>
+      <param-name>forceRequestEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+<!--    强制响应编码-->
+    <init-param>
+      <param-name>forceResponseEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+<!--    表示拦截所有请求（RESTFUL风格）-->
+<!--    <url-pattern>/*</url-pattern>-->
+
+<!--    请求扩展名,解决请求扩展名和响应体的数据格式不匹配的问题-->
+    <url-pattern>*.html,*json,*js</url-pattern>
+  </filter-mapping>
+  
+  
+<!--  加载springIOC容器：ContextLoaderListener扫描spring配置文件（applicationContext.xml，可通过设置contextConfigLocation来定向扫描）-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+<!-- springMVC的前端控制器：加载springMVC的IOC容器：ContextLoaderListener扫描springMVC配置文件（可通过设置contextConfigLocation来定向扫描） -->
+  <servlet>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-web-mvc.xml</param-value>
+    </init-param>
+<!--    使DispatcherServlet在web应用启动时初始化（默认时在创建对象时初始化）-->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+<!--  /:默认模式，未被匹配的路径都将映射到servlet，对jpg，js，css等静态文件也将被拦截，不能访问。-->
+  <servlet-mapping>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+<!--  设置静态资源可访问-->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.gif</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.jpg</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.css</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.js</url-pattern>
+  </servlet-mapping>
+
+
+
+
+</web-app>
