@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+<!--    扫描mvc下的所有包(controller,interceptor,config)-->
+    <context:component-scan base-package="com.tz.mvc"></context:component-scan>
+
+<!--    启用mvc的注解驱动-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+<!--    配置视图解析器-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+<!--    配置基于xml的异常映射-->
+    <bean id="simpleMappingExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+<!--        配置异常类和具体视图界面的对应关系-->
+        <property name="exceptionMappings">
+            <props>
+<!--                key 属性指定异常类，标签体中写具体跳转显示的错误页面-->
+                <prop key="java.lang.Exception">system-error</prop>
+                <prop key="com.tz.exception.AccessForbiddenException">admin-login</prop>
+            </props>
+        </property>
+    </bean>
+
+<!--    配置view-controller ：固定地址定向访问页面(登录页面和主管理界面)-->
+<!--
+        @RestController("/admin/to/login.html")
+        public String toLogin(){
+            return "admin-login"
+        }
+-->
+<!--    登录跳转（不带数据的情况下）-->
+    <mvc:view-controller path="/admin/to/login.html" view-name="admin-login"></mvc:view-controller>
+<!--    主页面跳转（不带数据的情况下）-->
+    <mvc:view-controller path="/admin/to/main.html" view-name="admin-main"></mvc:view-controller>
+<!--    新增数据跳转（不带数据的情况下）-->
+    <mvc:view-controller path="/admin/to/add.html" view-name="admin-add"></mvc:view-controller>
+<!--    角色维护页面跳转（不带数据的情况下）-->
+    <mvc:view-controller path="/role/to/page.html" view-name="role-page"></mvc:view-controller>
+
+
+<!--    注册拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+<!--            拦截指定的URL
+                /*对应一层路径 比如：/aaa
+                /**对应多层路径，比如：/aaa/bbb,/aaa/bbb/ccc
+-->
+            <mvc:mapping path="/**"/>
+<!--            不需要拦截的URL-->
+            <mvc:exclude-mapping path="/admin/to/login.html"/>
+            <mvc:exclude-mapping path="/admin/to/main.html"/>
+            <mvc:exclude-mapping path="/admin/to/logout.html"/>
+<!--            配置拦截器类-->
+            <bean class="com.tz.mvc.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+
+</beans>
