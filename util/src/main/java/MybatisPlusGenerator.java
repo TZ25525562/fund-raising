@@ -44,7 +44,7 @@ public class MybatisPlusGenerator {
                 .setColumnNaming(NamingStrategy.underline_to_camel)
                 .setTablePrefix("t_")
 //                    生成的表
-                .setInclude("t_role");
+                .setInclude("t_menu");
 //            4.包名策略设置
         PackageConfig packageConfig = new PackageConfig();
         packageConfig.setParent("com.tz")

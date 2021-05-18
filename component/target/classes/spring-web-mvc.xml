@@ -50,6 +50,9 @@
 <!--    角色维护页面跳转（不带数据的情况下）-->
     <mvc:view-controller path="/role/to/page.html" view-name="role-page"></mvc:view-controller>
 
+<!--    菜单维护主页面跳转-->
+    <mvc:view-controller path="/menu/to/page.html" view-name="menu-page"></mvc:view-controller>
+
 
 <!--    注册拦截器-->
     <mvc:interceptors>

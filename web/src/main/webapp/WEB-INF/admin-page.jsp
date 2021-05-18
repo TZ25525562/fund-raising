@@ -103,7 +103,7 @@
                                         <td>${admin.userName}</td>
                                         <td>${admin.email}</td>
                                         <td>
-                                            <button type="button" class="btn btn-success btn-sm">分配</button>
+                                            <a href="assign/to/assign/role/page.html?adminId=${admin.id}&keyword=${param.keyword}&pageNum=${requestScope.pageInfo.pageNum}"type="button" class="btn btn-success btn-sm">分配</a>
                                             <a href="admin/to/edit/page.html?adminId=${admin.id}&keyword=${param.keyword}&pageNum=${requestScope.pageInfo.pageNum}" class="btn btn-primary btn-sm ">更新</a>
                                             <a href="admin/remove/${admin.id}/${requestScope.pageInfo.pageNum}/${param.keyword}.html" type="button" class="btn btn-danger btn-sm ">删除</a>
                                         </td>

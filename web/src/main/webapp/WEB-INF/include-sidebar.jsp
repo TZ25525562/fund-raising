@@ -10,13 +10,13 @@
                 <span><i class=""></i> 权限管理 <span class="badge" style="float:right">3</span></span>
                 <ul style="margin-top:10px;display:none;">
                     <li style="height:30px;">
-                        <a href="admin/to/page.html"><i class=""></i> 用户维护</a>
+                        <a href="admin/to/page.html"><i class=""></i>用户维护</a>
                     </li>
                     <li style="height:30px;">
-                        <a href="role/to/page.html"><i class=""></i> 角色维护</a>
+                        <a href="role/to/page.html"><i class=""></i>角色维护</a>
                     </li>
                     <li style="height:30px;">
-                        <a href="permission.html"><i class=""></i> 菜单维护</a>
+                        <a href="menu/to/page.html"><i class=""></i>菜单维护</a>
                     </li>
                 </ul>
             </li>

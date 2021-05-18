@@ -29,12 +29,14 @@
         <property name="idType" value="AUTO"></property>
     </bean>
 
-
+<!--    注入自定义的Injector-->
+    <bean name="mySqlInjector" class="com.tz.util.MyInjector"></bean>
 
 
     <!--    mybatisPlus全局设置-->
     <bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
         <property name="dbConfig" ref="dbConfig"></property>
+        <property name="sqlInjector" ref="mySqlInjector"></property>
     </bean>
 
 
